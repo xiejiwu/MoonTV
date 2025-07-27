@@ -1,5 +1,7 @@
 # MoonTV
 
+基于  Vercel 免费部署 详情参见 itv.wang / yuan.black
+
 <div align="center">
   <img src="public/logo.png" alt="LibreTV Logo" width="120">
 </div>
