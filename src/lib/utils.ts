@@ -35,9 +35,14 @@ export function processImageUrl(originalUrl: string): string {
   if (!originalUrl) return originalUrl;
 
   const proxyUrl = getImageProxyUrl();
-  if (!proxyUrl) return originalUrl;
+  if (proxyUrl) return `${proxyUrl}${encodeURIComponent(originalUrl)}`;
 
-  return `${proxyUrl}${encodeURIComponent(originalUrl)}`;
+  // 豆瓣图片拒绝无 Referer 的请求，未配置代理时走内置代理
+  if (/^https?:\/\/img\d*\.doubanio\.com\//.test(originalUrl)) {
+    return `/api/image-proxy?url=${encodeURIComponent(originalUrl)}`;
+  }
+
+  return originalUrl;
 }
 
 /**
